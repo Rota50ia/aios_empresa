@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AIOS — Mapa Mental da Empresa v2.0</title>
+<title>AIOS — Mapa Mental da Empresa v3.0</title>
+<script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -43,69 +44,40 @@ body {
 }
 
 /* ─── HEADER ─── */
-.header {
-  text-align: center;
-  margin-bottom: 48px;
-}
+.header { text-align: center; margin-bottom: 48px; }
 .header-tag {
   display: inline-block;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
   color: var(--ceo);
-  background: rgba(0,229,255,0.08);
-  border: 1px solid rgba(0,229,255,0.2);
-  border-radius: 20px;
-  padding: 4px 14px;
-  margin-bottom: 16px;
+  background: rgba(0,229,255,0.08); border: 1px solid rgba(0,229,255,0.2);
+  border-radius: 20px; padding: 4px 14px; margin-bottom: 16px;
 }
-.header h1 {
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  font-weight: 900;
-  letter-spacing: 4px;
-  color: #fff;
-  line-height: 1;
-}
+.header h1 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; letter-spacing: 4px; color: #fff; line-height: 1; }
 .header h1 span { color: var(--ceo); }
-.header-sub {
-  margin-top: 8px;
-  font-size: 0.75rem;
-  color: var(--muted);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-.header-status {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-.h-stat {
-  font-size: 0.7rem;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+.header-sub { margin-top: 8px; font-size: 0.75rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+.header-status { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+.h-stat { font-size: 0.7rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
 .h-stat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ops); animation: pulse 2s infinite; }
+.h-interactive-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 1px;
+  color: #00e5ff; background: rgba(0,229,255,0.08);
+  border: 1px solid rgba(0,229,255,0.25); border-radius: 20px;
+  padding: 4px 12px;
+  animation: pulse-border 2.5s ease-in-out infinite;
+}
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+@keyframes pulse-border {
+  0%,100%{ border-color: rgba(0,229,255,0.25); }
+  50%{ border-color: rgba(0,229,255,0.6); }
+}
 
 /* ─── LEGEND ─── */
 .legend {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
-  padding: 14px 20px;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  max-width: 860px;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 40px; padding: 14px 20px;
+  background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+  border-radius: 12px; max-width: 860px; margin-left: auto; margin-right: auto;
 }
 .leg { display: flex; align-items: center; gap: 6px; font-size: 0.68rem; color: var(--muted); }
 .leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
@@ -114,86 +86,44 @@ body {
 .tree { display: flex; flex-direction: column; align-items: center; gap: 0; }
 
 /* ─── CONNECTORS ─── */
-.conn-v {
-  width: 2px;
-  height: 32px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(255,255,255,0.04));
-  margin: 0 auto;
-}
+.conn-v { width: 2px; height: 32px; background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(255,255,255,0.04)); margin: 0 auto; }
 .conn-v-short { height: 18px; }
-.section-divider {
-  width: 100%;
-  max-width: 1400px;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent);
-  margin: 8px auto;
-}
-.section-label {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-align: center;
-  margin: 14px 0 6px;
-}
+.section-divider { width: 100%; max-width: 1400px; height: 1px; background: linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent); margin: 8px auto; }
+.section-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); text-align: center; margin: 14px 0 6px; }
 
 /* ─── ROW ─── */
-.row {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 14px;
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: 1440px;
-}
+.row { display: flex; justify-content: center; align-items: flex-start; gap: 14px; flex-wrap: wrap; width: 100%; max-width: 1440px; }
 .col { display: flex; flex-direction: column; align-items: center; }
 
 /* ─── CARD BASE ─── */
 .card {
-  border-radius: 16px;
-  padding: 16px 20px;
-  text-align: center;
-  position: relative;
+  border-radius: 16px; padding: 16px 20px; text-align: center; position: relative;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  cursor: default;
-  backdrop-filter: blur(10px);
+  cursor: default; backdrop-filter: blur(10px);
 }
 .card:hover { transform: translateY(-4px); }
-.card .ctag {
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-.card .cname {
-  font-size: 1rem;
-  font-weight: 800;
-  line-height: 1.2;
-  color: #fff;
-}
-.card .csub {
-  font-size: 0.68rem;
-  margin-top: 5px;
-  opacity: 0.6;
-  line-height: 1.5;
-}
+.card .ctag { font-size: 0.58rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+.card .cname { font-size: 1rem; font-weight: 800; line-height: 1.2; color: #fff; }
+.card .csub { font-size: 0.68rem; margin-top: 5px; opacity: 0.6; line-height: 1.5; }
 .card .cbadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 10px;
-  font-size: 0.6rem;
-  padding: 3px 9px;
-  border-radius: 20px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-top: 10px; font-size: 0.6rem; padding: 3px 9px;
+  border-radius: 20px; font-weight: 700; letter-spacing: 0.3px;
 }
 .bOK   { background: rgba(0,230,118,0.12); color: #00e676; border: 1px solid rgba(0,230,118,0.3); }
 .bWIP  { background: rgba(255,167,38,0.12); color: #ffa726; border: 1px solid rgba(255,167,38,0.3); }
 .bPend { background: rgba(121,134,203,0.12); color: #7986cb; border: 1px solid rgba(121,134,203,0.3); }
+
+/* ─── CLICKABLE CLONE CARDS ─── */
+.card[data-clone] { cursor: pointer; }
+.card[data-clone]:hover { transform: translateY(-6px) scale(1.02); }
+.card[data-clone]::after {
+  content: "💬 conversar";
+  display: block; font-size: 0.52rem; color: rgba(255,255,255,0.25);
+  margin-top: 8px; letter-spacing: 1px; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.card[data-clone]:hover::after { color: rgba(255,255,255,0.65); }
 
 /* ─── CEO ─── */
 .card-ceo {
@@ -220,59 +150,28 @@ body {
 .card-coo .ctag { color: var(--coo); }
 
 /* ─── CONSELHEIRO ─── */
-.card-conselho {
-  background: rgba(206,147,216,0.05);
-  border: 1px solid rgba(206,147,216,0.25);
-  min-width: 150px;
-}
+.card-conselho { background: rgba(206,147,216,0.05); border: 1px solid rgba(206,147,216,0.25); min-width: 150px; }
 .card-conselho .ctag { color: var(--conselho); }
 .card-conselho .cname { font-size: 0.9rem; }
 
 /* ─── HEAD SQUAD ─── */
-.card-head {
-  min-width: 175px;
-  background: rgba(255,255,255,0.02);
-}
+.card-head { min-width: 175px; background: rgba(255,255,255,0.02); }
 
 /* ─── SQUAD PANEL ─── */
 .squad-panel {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 14px;
-  padding: 14px;
-  width: 192px;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 14px; padding: 14px; width: 192px;
   transition: transform 0.25s ease, border-color 0.25s ease;
 }
 .squad-panel:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.1); }
-.sp-title {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 8px;
-  letter-spacing: 0.3px;
-}
-.sp-kpi {
-  font-size: 0.62rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-.sp-funcs {
-  font-size: 0.62rem;
-  color: #666;
-  line-height: 1.7;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  padding-top: 8px;
-}
+.sp-title { font-size: 0.78rem; font-weight: 700; color: #fff; margin-bottom: 8px; letter-spacing: 0.3px; }
+.sp-kpi { font-size: 0.62rem; font-weight: 600; margin-bottom: 8px; }
+.sp-funcs { font-size: 0.62rem; color: #666; line-height: 1.7; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; }
 .sp-func { display: flex; align-items: center; gap: 5px; }
 .sp-dot { width: 5px; height: 5px; border-radius: 50%; background: #333; flex-shrink: 0; }
 .sp-dot.ok { background: #00e676; }
 .sp-dot.wip { background: #ffa726; }
-.sp-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 10px;
-}
+.sp-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
 .sb { font-size: 0.56rem; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
 .sb-clone  { background: rgba(0,230,118,0.1); color: #69f0ae; border: 1px solid rgba(0,230,118,0.25); }
 .sb-prd    { background: rgba(66,165,245,0.1); color: #82b1ff; border: 1px solid rgba(66,165,245,0.25); }
@@ -280,149 +179,200 @@ body {
 .sb-pend   { background: rgba(100,100,100,0.1); color: #666; border: 1px solid rgba(100,100,100,0.2); }
 .sb-lend   { background: rgba(255,193,7,0.1); color: #ffc107; border: 1px solid rgba(255,193,7,0.3); }
 
-/* ─── AVULSOS ─── */
-.card-avulso {
-  background: rgba(255,255,255,0.015);
-  border: 1px dashed rgba(84,110,122,0.4);
-  min-width: 145px;
+/* ─── CLICKABLE TASK ITEMS ─── */
+.clickable-task {
+  cursor: pointer; border-radius: 5px; padding: 1px 5px; margin-left: -5px;
+  transition: background 0.15s, color 0.15s;
 }
+.clickable-task:hover { background: rgba(255,255,255,0.07); color: #ddd; }
+.task-hint { font-size: 0.46rem; opacity: 0.35; margin-left: 3px; vertical-align: middle; }
+.clickable-task:hover .task-hint { opacity: 0.8; }
+
+/* ─── AVULSOS ─── */
+.card-avulso { background: rgba(255,255,255,0.015); border: 1px dashed rgba(84,110,122,0.4); min-width: 145px; }
 .card-avulso .ctag { color: var(--avulso); }
 .card-avulso .cname { font-size: 0.85rem; color: #aaa; }
 
 /* ─── MOTOR DE CONVERSÃO ─── */
 .motor-box {
   background: linear-gradient(135deg, rgba(255,109,0,0.06), rgba(255,193,7,0.04));
-  border: 1px solid rgba(255,109,0,0.25);
-  border-radius: 20px;
-  padding: 24px 28px;
-  max-width: 860px;
-  width: 100%;
-  margin: 0 auto;
+  border: 1px solid rgba(255,109,0,0.25); border-radius: 20px; padding: 24px 28px;
+  max-width: 860px; width: 100%; margin: 0 auto;
 }
-.motor-title {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--marketing);
-  margin-bottom: 6px;
-}
-.motor-name {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 4px;
-}
+.motor-title { font-size: 0.62rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--marketing); margin-bottom: 6px; }
+.motor-name { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
 .motor-sub { font-size: 0.72rem; color: #888; margin-bottom: 18px; }
-.motor-plans {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.plan-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 12px;
-  padding: 16px 18px;
-  text-align: center;
-  min-width: 160px;
-  transition: transform 0.2s;
-}
+.motor-plans { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.plan-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 16px 18px; text-align: center; min-width: 160px; transition: transform 0.2s; }
 .plan-card:hover { transform: translateY(-3px); }
 .plan-card.anchor { border-color: rgba(255,109,0,0.4); background: rgba(255,109,0,0.06); }
-.plan-anchor-tag {
-  display: inline-block;
-  font-size: 0.55rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--marketing);
-  background: rgba(255,109,0,0.15);
-  border-radius: 8px;
-  padding: 1px 6px;
-  margin-bottom: 6px;
-}
+.plan-anchor-tag { display: inline-block; font-size: 0.55rem; font-weight: 700; letter-spacing: 1px; color: var(--marketing); background: rgba(255,109,0,0.15); border-radius: 8px; padding: 1px 6px; margin-bottom: 6px; }
 .plan-name { font-size: 0.75rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
 .plan-price { font-size: 1.1rem; font-weight: 800; color: var(--coo); }
 .plan-mo { font-size: 0.6rem; color: #666; }
 .plan-includes { font-size: 0.6rem; color: #777; margin-top: 8px; line-height: 1.6; }
-.motor-ltv {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 18px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
+.motor-ltv { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.05); }
 .ltv-item { text-align: center; }
 .ltv-val { font-size: 1rem; font-weight: 800; color: var(--ops); }
 .ltv-lbl { font-size: 0.6rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.5px; }
 
 /* ─── INFRA ─── */
-.infra-box {
-  background: rgba(255,255,255,0.015);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 16px;
-  padding: 20px 24px;
-  max-width: 860px;
-  width: 100%;
-}
+.infra-box { background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 20px 24px; max-width: 860px; width: 100%; }
 .infra-title { font-size: 0.62rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--admin); margin-bottom: 14px; }
 .infra-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.infra-pill {
-  font-size: 0.65rem;
-  padding: 5px 14px;
-  border-radius: 20px;
-  font-weight: 600;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: #aaa;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
+.infra-pill { font-size: 0.65rem; padding: 5px 14px; border-radius: 20px; font-weight: 600; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: #aaa; display: flex; align-items: center; gap: 5px; }
 .infra-pill span { font-size: 0.7rem; }
 
 /* ─── STATS ─── */
 .stats-bar {
-  display: flex;
-  justify-content: center;
-  gap: 0;
-  flex-wrap: wrap;
-  margin-top: 0;
-  padding: 24px 30px;
-  background: rgba(255,255,255,0.02);
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  max-width: 860px;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex; justify-content: center; gap: 0; flex-wrap: wrap;
+  padding: 24px 30px; background: rgba(255,255,255,0.02);
+  border-radius: 16px; border: 1px solid var(--border);
+  max-width: 860px; margin-left: auto; margin-right: auto;
 }
-.stat {
-  text-align: center;
-  padding: 0 24px;
-  border-right: 1px solid rgba(255,255,255,0.06);
-}
+.stat { text-align: center; padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.06); }
 .stat:last-child { border-right: none; }
 .stat .val { font-size: 1.8rem; font-weight: 900; color: var(--ceo); letter-spacing: -1px; }
 .stat .lbl { font-size: 0.6rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
 
 /* ─── FOOTER ─── */
-.footer {
-  text-align: center;
-  margin-top: 30px;
-  color: #2a2a3a;
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
+.footer { text-align: center; margin-top: 30px; color: #2a2a3a; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; }
 
 /* ─── WRAPPER SECTION ─── */
-.section-wrap {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
+.section-wrap { width: 100%; max-width: 1440px; margin: 0 auto; }
+
+/* ══════════════════════════════════════════════════════ */
+/* ─── MODAL OVERLAY ─── */
+/* ══════════════════════════════════════════════════════ */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.78); backdrop-filter: blur(5px);
+  z-index: 1000; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+
+/* ─── CHAT MODAL ─── */
+.chat-modal {
+  width: 100%; max-width: 480px;
+  height: min(72vh, 620px);
+  background: linear-gradient(145deg, #0a0a1e, #10102a);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  display: flex; flex-direction: column; overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+  animation: modal-in 0.25s ease;
+}
+@keyframes modal-in { from { opacity:0; transform:translateY(20px) scale(0.96); } to { opacity:1; transform:translateY(0) scale(1); } }
+
+.chat-header {
+  padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+  background: rgba(255,255,255,0.02);
+}
+.chat-header-info { display: flex; align-items: center; gap: 12px; }
+.chat-avatar {
+  font-size: 1.7rem; width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.05); border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.chat-name { font-size: 0.95rem; font-weight: 800; color: #fff; }
+.chat-role { font-size: 0.6rem; color: rgba(255,255,255,0.38); margin-top: 2px; }
+.chat-header-right { display: flex; align-items: center; gap: 10px; }
+.chat-badge { font-size: 0.54rem; padding: 3px 8px; border-radius: 20px; font-weight: 700; background: rgba(0,229,255,0.1); color: #00e5ff; border: 1px solid rgba(0,229,255,0.2); }
+.chat-close {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px; color: #666; width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 0.8rem; transition: background 0.2s, color 0.2s;
+}
+.chat-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 10px;
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent;
+}
+.chat-bubble {
+  max-width: 86%; padding: 10px 14px; border-radius: 14px;
+  font-size: 0.81rem; line-height: 1.65; word-break: break-word;
+}
+.chat-bubble.user { align-self: flex-end; background: rgba(0,229,255,0.12); border: 1px solid rgba(0,229,255,0.22); color: #e8e8f0; }
+.chat-bubble.assistant { align-self: flex-start; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); color: #c4c4d4; white-space: pre-wrap; }
+
+.chat-typing { padding: 4px 18px 8px; flex-shrink: 0; }
+.typing-dots { display: flex; gap: 4px; align-items: center; }
+.typing-dots span {
+  width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.25);
+  animation: bounce-dot 1.2s infinite;
+}
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce-dot {
+  0%,60%,100% { transform:translateY(0); opacity:0.35; }
+  30% { transform:translateY(-5px); opacity:1; }
+}
+
+.chat-input-area {
+  padding: 12px 14px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; gap: 8px; flex-shrink: 0;
+}
+.chat-input {
+  flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 12px; color: #e8e8f0; padding: 10px 14px;
+  font-size: 0.82rem; font-family: inherit; outline: none; transition: border-color 0.2s;
+}
+.chat-input:focus { border-color: rgba(0,229,255,0.3); }
+.chat-input::placeholder { color: rgba(255,255,255,0.18); }
+.chat-send-btn {
+  background: rgba(0,229,255,0.15); border: 1px solid rgba(0,229,255,0.3);
+  border-radius: 12px; color: #00e5ff; width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1rem; font-weight: 700;
+  transition: background 0.2s; flex-shrink: 0;
+}
+.chat-send-btn:hover { background: rgba(0,229,255,0.28); }
+.chat-send-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* ─── TASK MODAL ─── */
+.task-modal {
+  width: 100%; max-width: 640px; max-height: 82vh;
+  background: #0b0b1e; border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px; display: flex; flex-direction: column; overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+  animation: modal-in 0.25s ease;
+}
+.task-modal-header {
+  padding: 20px 24px 16px; border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex; justify-content: space-between; align-items: flex-start; flex-shrink: 0;
+}
+.task-modal-squad { font-size: 0.58rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; opacity: 0.65; }
+.task-modal-title { font-size: 1.05rem; font-weight: 800; color: #fff; }
+.task-modal-body {
+  flex: 1; overflow-y: auto; padding: 20px 24px;
+  font-size: 0.81rem; line-height: 1.72; color: #b8b8cc;
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent;
+}
+.task-modal-body h1 { color: #fff; font-weight: 800; font-size: 1rem; margin: 18px 0 8px; }
+.task-modal-body h1:first-child { margin-top: 0; }
+.task-modal-body h2 { color: #e8e8f0; font-weight: 700; font-size: 0.92rem; margin: 16px 0 6px; }
+.task-modal-body h3 { color: #d0d0e0; font-weight: 700; font-size: 0.85rem; margin: 12px 0 5px; }
+.task-modal-body p { margin: 7px 0; }
+.task-modal-body ul, .task-modal-body ol { margin: 7px 0; padding-left: 18px; }
+.task-modal-body li { margin: 4px 0; }
+.task-modal-body table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.77rem; }
+.task-modal-body th { background: rgba(255,255,255,0.05); color: #fff; padding: 8px 10px; text-align: left; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.task-modal-body td { padding: 6px 10px; border-top: 1px solid rgba(255,255,255,0.04); }
+.task-modal-body code { background: rgba(255,255,255,0.07); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 0.74rem; color: #a0d0ff; }
+.task-modal-body strong { color: #e8e8f0; font-weight: 700; }
+.task-modal-body blockquote { border-left: 2px solid rgba(255,255,255,0.2); padding-left: 12px; color: #888; font-style: italic; margin: 8px 0; }
+.task-modal-body hr { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 16px 0; }
+
+@media (max-width: 600px) {
+  .chat-modal { height: 90vh; border-radius: 16px; }
+  .task-modal { max-height: 90vh; border-radius: 16px; }
+  .row { gap: 8px; }
+  .squad-panel { width: 170px; }
 }
 </style>
 </head>
@@ -437,7 +387,8 @@ body {
     <div class="h-stat"><div class="h-stat-dot"></div>Sistema Ativo</div>
     <div class="h-stat">CEO: Edilson Morais</div>
     <div class="h-stat">Atualizado: 24/02/2026</div>
-    <div class="h-stat">v2.0</div>
+    <div class="h-stat">v3.0</div>
+    <div class="h-interactive-badge">💬 Clones interativos · clique para conversar</div>
   </div>
 </div>
 
@@ -468,11 +419,11 @@ body {
   <div class="conn-v"></div>
 
   <!-- ══════════ COO ══════════ -->
-  <div class="card card-coo">
+  <div class="card card-coo" data-clone="alex-hormozi">
     <div class="ctag" style="color:var(--coo)">⚡ AGENTE CHEFE — COO</div>
     <div class="cname">Alex Hormozi</div>
     <div class="csub">Orquestrador Geral · ROI & Margem<br>Aprova até R$50k · Sistemas Escaláveis</div>
-    <span class="cbadge bOK">✅ Clone 95-98%</span>
+    <span class="cbadge bOK">✅ Clone 100% Elite</span>
   </div>
 
   <div class="conn-v"></div>
@@ -482,7 +433,7 @@ body {
 
   <div class="row">
     <div class="col">
-      <div class="card card-conselho">
+      <div class="card card-conselho" data-clone="simon-sinek">
         <div class="ctag">🎯 Propósito</div>
         <div class="cname">Simon Sinek</div>
         <div class="csub">Golden Circle<br>Cultura & Liderança</div>
@@ -490,7 +441,7 @@ body {
       </div>
     </div>
     <div class="col">
-      <div class="card card-conselho" style="border-color:rgba(239,154,154,0.3)">
+      <div class="card card-conselho" style="border-color:rgba(239,154,154,0.3)" data-clone="steve-jobs">
         <div class="ctag" style="color:#ef9a9a">🍎 Produto</div>
         <div class="cname">Steve Jobs</div>
         <div class="csub">Design Thinking<br>Excelência & Visão</div>
@@ -498,7 +449,7 @@ body {
       </div>
     </div>
     <div class="col">
-      <div class="card card-conselho" style="border-color:rgba(128,222,234,0.3)">
+      <div class="card card-conselho" style="border-color:rgba(128,222,234,0.3)" data-clone="elon-musk">
         <div class="ctag" style="color:#80deea">🚀 Tech & Inovação</div>
         <div class="cname">Elon Musk</div>
         <div class="csub">First Principles<br>Eficiência Radical</div>
@@ -506,7 +457,7 @@ body {
       </div>
     </div>
     <div class="col">
-      <div class="card card-conselho" style="border-color:rgba(165,214,167,0.3)">
+      <div class="card card-conselho" style="border-color:rgba(165,214,167,0.3)" data-clone="seth-godin">
         <div class="ctag" style="color:#a5d6a7">📖 Marketing</div>
         <div class="cname">Seth Godin</div>
         <div class="csub">Tribes · Storytelling<br>Marketing Autêntico</div>
@@ -524,7 +475,7 @@ body {
 
     <!-- VENDAS -->
     <div class="col">
-      <div class="card card-head" style="border:1.5px solid rgba(255,82,82,0.35); background:rgba(255,82,82,0.05);">
+      <div class="card card-head" style="border:1.5px solid rgba(255,82,82,0.35); background:rgba(255,82,82,0.05);" data-clone="dan-kennedy">
         <div class="ctag" style="color:var(--vendas)">💰 HEAD · VENDAS</div>
         <div class="cname">Dan Kennedy</div>
         <div class="csub">Direct Response · High-Ticket<br>No B.S. Philosophy</div>
@@ -535,10 +486,10 @@ body {
         <div class="sp-title">💰 Squad Vendas</div>
         <div class="sp-kpi" style="color:var(--vendas)">SDR · Closer · Analista</div>
         <div class="sp-funcs">
-          <div class="sp-func"><div class="sp-dot ok"></div>10 Tasks documentadas</div>
+          <div class="sp-func clickable-task" data-task="lead-qualification"><div class="sp-dot ok"></div>Lead Qualification<span class="task-hint">📋</span></div>
+          <div class="sp-func clickable-task" data-task="discovery-call"><div class="sp-dot ok"></div>Discovery Call<span class="task-hint">📋</span></div>
+          <div class="sp-func clickable-task" data-task="close-deal"><div class="sp-dot ok"></div>Close Deal<span class="task-hint">📋</span></div>
           <div class="sp-func"><div class="sp-dot ok"></div>Pipeline + Forecast</div>
-          <div class="sp-func"><div class="sp-dot ok"></div>Lead Qualification</div>
-          <div class="sp-func"><div class="sp-dot ok"></div>Discovery + Proposta</div>
         </div>
         <div class="sp-badges">
           <span class="sb sb-clone">Clone ✅</span>
@@ -550,7 +501,7 @@ body {
 
     <!-- MARKETING -->
     <div class="col">
-      <div class="card card-head" style="border:1.5px solid rgba(255,109,0,0.35); background:rgba(255,109,0,0.05);">
+      <div class="card card-head" style="border:1.5px solid rgba(255,109,0,0.35); background:rgba(255,109,0,0.05);" data-clone="russell-brunson">
         <div class="ctag" style="color:var(--marketing)">📣 HEAD · MARKETING</div>
         <div class="cname">Russell Brunson</div>
         <div class="csub">Funis · Value Ladder<br>ClickFunnels $100M+</div>
@@ -561,9 +512,9 @@ body {
         <div class="sp-title">📣 Squad Marketing</div>
         <div class="sp-kpi" style="color:var(--marketing)">Email · Media Buyer · Social</div>
         <div class="sp-funcs">
-          <div class="sp-func"><div class="sp-dot ok"></div>9 Tasks documentadas</div>
-          <div class="sp-func"><div class="sp-dot ok"></div>Campanhas + Ads</div>
-          <div class="sp-func"><div class="sp-dot ok"></div>Content + Copy</div>
+          <div class="sp-func clickable-task" data-task="create-content"><div class="sp-dot ok"></div>Create Content<span class="task-hint">📋</span></div>
+          <div class="sp-func clickable-task" data-task="write-launch-sequence"><div class="sp-dot ok"></div>Launch Email Sequence<span class="task-hint">📋</span></div>
+          <div class="sp-func"><div class="sp-dot ok"></div>Ads + Media Buyer</div>
           <div class="sp-func"><div class="sp-dot ok"></div>Analytics + Métricas</div>
         </div>
         <div class="sp-badges">
@@ -587,9 +538,9 @@ body {
         <div class="sp-title">⚙️ Squad OPS</div>
         <div class="sp-kpi" style="color:var(--ops)">Process Mapper · Architect</div>
         <div class="sp-funcs">
-          <div class="sp-func"><div class="sp-dot ok"></div>8 Tasks documentadas</div>
+          <div class="sp-func clickable-task" data-task="discovery-process"><div class="sp-dot ok"></div>Discovery Process<span class="task-hint">📋</span></div>
+          <div class="sp-func clickable-task" data-task="create-automations"><div class="sp-dot ok"></div>Create Automations<span class="task-hint">📋</span></div>
           <div class="sp-func"><div class="sp-dot ok"></div>4 Quality Gates</div>
-          <div class="sp-func"><div class="sp-dot ok"></div>Automation Engineer</div>
           <div class="sp-func"><div class="sp-dot ok"></div>QA + Delivery</div>
         </div>
         <div class="sp-badges">
@@ -602,7 +553,7 @@ body {
 
     <!-- CUSTOMER SUCCESS -->
     <div class="col">
-      <div class="card card-head" style="border:1.5px solid rgba(38,198,218,0.35); background:rgba(38,198,218,0.05);">
+      <div class="card card-head" style="border:1.5px solid rgba(38,198,218,0.35); background:rgba(38,198,218,0.05);" data-clone="lincoln-murphy">
         <div class="ctag" style="color:var(--cs)">🤝 HEAD · CS</div>
         <div class="cname">Lincoln Murphy</div>
         <div class="csub">Desired Outcome · NRR<br>CS-Driven Growth</div>
@@ -613,10 +564,10 @@ body {
         <div class="sp-title">🤝 Squad Customer Success</div>
         <div class="sp-kpi" style="color:var(--cs)">Onboarding · Expansão · Retenção</div>
         <div class="sp-funcs">
-          <div class="sp-func"><div class="sp-dot ok"></div>12 Tasks documentadas</div>
-          <div class="sp-func"><div class="sp-dot ok"></div>NRR · LTV · Outcomes</div>
-          <div class="sp-func"><div class="sp-dot ok"></div>CS Playbooks completos</div>
-          <div class="sp-func"><div class="sp-dot ok"></div>Milestone Expansion</div>
+          <div class="sp-func clickable-task" data-task="first-value"><div class="sp-dot ok"></div>First Value<span class="task-hint">📋</span></div>
+          <div class="sp-func clickable-task" data-task="health-check"><div class="sp-dot ok"></div>Health Check<span class="task-hint">📋</span></div>
+          <div class="sp-func"><div class="sp-dot ok"></div>Upsell Detection</div>
+          <div class="sp-func"><div class="sp-dot ok"></div>Churn Prevention</div>
         </div>
         <div class="sp-badges">
           <span class="sb sb-lend">Lendário ⭐</span>
@@ -628,7 +579,7 @@ body {
 
     <!-- PRODUTO -->
     <div class="col">
-      <div class="card card-head" style="border:1.5px solid rgba(186,104,200,0.35); background:rgba(186,104,200,0.05);">
+      <div class="card card-head" style="border:1.5px solid rgba(186,104,200,0.35); background:rgba(186,104,200,0.05);" data-clone="marty-cagan">
         <div class="ctag" style="color:var(--produto)">📦 HEAD · PRODUTO</div>
         <div class="cname">Marty Cagan</div>
         <div class="csub">Product Discovery<br>4 Riscos · OKRs</div>
@@ -639,7 +590,7 @@ body {
         <div class="sp-title">📦 Squad Produto</div>
         <div class="sp-kpi" style="color:var(--produto)">CPO · PM · Designer</div>
         <div class="sp-funcs">
-          <div class="sp-func"><div class="sp-dot ok"></div>Discovery + Delivery</div>
+          <div class="sp-func clickable-task" data-task="product-discovery"><div class="sp-dot ok"></div>Product Discovery<span class="task-hint">📋</span></div>
           <div class="sp-func"><div class="sp-dot ok"></div>4 Riscos validados</div>
           <div class="sp-func"><div class="sp-dot ok"></div>Roadmap + Backlog</div>
           <div class="sp-func"><div class="sp-dot ok"></div>User Research</div>
@@ -654,7 +605,7 @@ body {
 
     <!-- ADMIN -->
     <div class="col">
-      <div class="card card-head" style="border:1.5px solid rgba(66,165,245,0.35); background:rgba(66,165,245,0.05);">
+      <div class="card card-head" style="border:1.5px solid rgba(66,165,245,0.35); background:rgba(66,165,245,0.05);" data-clone="sheryl-sandberg">
         <div class="ctag" style="color:var(--admin)">🏢 HEAD · ADMIN</div>
         <div class="cname">Sheryl Sandberg</div>
         <div class="csub">CAO · Pessoas & Processos<br>Financeiro · Jurídico</div>
@@ -665,10 +616,10 @@ body {
         <div class="sp-title">🏢 Squad Admin</div>
         <div class="sp-kpi" style="color:var(--admin)">17 Funções · 5 Áreas</div>
         <div class="sp-funcs">
-          <div class="sp-func"><div class="sp-dot ok"></div>💰 Financeiro (4)</div>
+          <div class="sp-func clickable-task" data-task="contas-a-pagar"><div class="sp-dot ok"></div>Contas a Pagar<span class="task-hint">📋</span></div>
+          <div class="sp-func clickable-task" data-task="contratos"><div class="sp-dot ok"></div>Gestão de Contratos<span class="task-hint">📋</span></div>
           <div class="sp-func"><div class="sp-dot ok"></div>👥 RH/People (4)</div>
-          <div class="sp-func"><div class="sp-dot ok"></div>⚖️ Jurídico (3)</div>
-          <div class="sp-func"><div class="sp-dot ok"></div>🛡️ Compliance (3)</div>
+          <div class="sp-func"><div class="sp-dot ok"></div>🛡️ Compliance LGPD</div>
         </div>
         <div class="sp-badges">
           <span class="sb sb-lend">Lendário ⭐</span>
@@ -680,7 +631,7 @@ body {
 
     <!-- PME -->
     <div class="col">
-      <div class="card card-head" style="border:1.5px solid rgba(198,241,53,0.35); background:rgba(198,241,53,0.04);">
+      <div class="card card-head" style="border:1.5px solid rgba(198,241,53,0.35); background:rgba(198,241,53,0.04);" data-clone="michael-gerber">
         <div class="ctag" style="color:var(--pme)">🏭 HEAD · PME</div>
         <div class="cname">Michael Gerber</div>
         <div class="csub">E-Myth · Sistemas<br>PMEs 1-100 func. BR</div>
@@ -691,10 +642,10 @@ body {
         <div class="sp-title">🏭 Squad PME</div>
         <div class="sp-kpi" style="color:var(--pme)">Diagnóstico · Sistemas · Scale</div>
         <div class="sp-funcs">
-          <div class="sp-func"><div class="sp-dot ok"></div>6 Tasks documentadas</div>
-          <div class="sp-func"><div class="sp-dot ok"></div>Primary Aim · E-Myth</div>
-          <div class="sp-func"><div class="sp-dot ok"></div>Mapear Processos</div>
-          <div class="sp-func"><div class="sp-dot ok"></div>Protótipo Franquia</div>
+          <div class="sp-func clickable-task" data-task="diagnostico-estagio"><div class="sp-dot ok"></div>Avaliação de Estágio<span class="task-hint">📋</span></div>
+          <div class="sp-func clickable-task" data-task="franchise-prototype"><div class="sp-dot ok"></div>Franchise Prototype<span class="task-hint">📋</span></div>
+          <div class="sp-func"><div class="sp-dot ok"></div>Primary Aim</div>
+          <div class="sp-func"><div class="sp-dot ok"></div>4 Fatores de Dinheiro</div>
         </div>
         <div class="sp-badges">
           <span class="sb sb-lend">Lendário ⭐</span>
@@ -724,7 +675,7 @@ body {
       <div class="csub">Alta Performance<br>Liderança</div>
       <span class="cbadge bPend" style="font-size:0.56rem">⏳ Pendente</span>
     </div>
-    <div class="card card-avulso">
+    <div class="card card-avulso" data-clone="ry-schwartz" style="opacity:1">
       <div class="ctag">✉️ Clone Avulso · Email Copy</div>
       <div class="cname">Ry Schwartz</div>
       <div class="csub">Email Copywriting<br>COHORT Framework</div>
@@ -765,26 +716,11 @@ body {
       </div>
     </div>
     <div class="motor-ltv">
-      <div class="ltv-item">
-        <div class="ltv-val">R$65.964</div>
-        <div class="ltv-lbl">LTV Anual/Cliente</div>
-      </div>
-      <div class="ltv-item">
-        <div class="ltv-val">43:1–131:1</div>
-        <div class="ltv-lbl">LTV:CAC Estimado</div>
-      </div>
-      <div class="ltv-item">
-        <div class="ltv-val">30 dias</div>
-        <div class="ltv-lbl">Garantia Integral</div>
-      </div>
-      <div class="ltv-item">
-        <div class="ltv-val">WhatsApp</div>
-        <div class="ltv-lbl">Canal de Entrega</div>
-      </div>
-      <div class="ltv-item">
-        <div class="ltv-val">2 clientes</div>
-        <div class="ltv-lbl">Meta Semana 1</div>
-      </div>
+      <div class="ltv-item"><div class="ltv-val">R$65.964</div><div class="ltv-lbl">LTV Anual/Cliente</div></div>
+      <div class="ltv-item"><div class="ltv-val">43:1–131:1</div><div class="ltv-lbl">LTV:CAC Estimado</div></div>
+      <div class="ltv-item"><div class="ltv-val">30 dias</div><div class="ltv-lbl">Garantia Integral</div></div>
+      <div class="ltv-item"><div class="ltv-val">WhatsApp</div><div class="ltv-lbl">Canal de Entrega</div></div>
+      <div class="ltv-item"><div class="ltv-val">2 clientes</div><div class="ltv-lbl">Meta Semana 1</div></div>
     </div>
   </div>
 
@@ -823,8 +759,855 @@ body {
 
 <!-- FOOTER -->
 <div class="footer">
-  AIOS-SQUADS-ORGANIZACAO-GERAL-EMPRESA · Edilson Morais · 24/02/2026 · v2.0
+  AIOS-SQUADS-ORGANIZACAO-GERAL-EMPRESA · Edilson Morais · 24/02/2026 · v3.0
 </div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- CHAT MODAL -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="chat-overlay" class="modal-overlay" onclick="closeChatModal()">
+  <div id="chat-modal" class="chat-modal" onclick="event.stopPropagation()">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar" id="chat-avatar">⚡</div>
+        <div>
+          <div class="chat-name" id="chat-name">Alex Hormozi</div>
+          <div class="chat-role" id="chat-role">Agente Chefe — COO</div>
+        </div>
+      </div>
+      <div class="chat-header-right">
+        <span class="chat-badge" id="chat-badge">100% Elite</span>
+        <button class="chat-close" onclick="closeChatModal()" title="Fechar">✕</button>
+      </div>
+    </div>
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-typing" id="chat-typing" style="display:none">
+      <div class="typing-dots"><span></span><span></span><span></span></div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chat-input" class="chat-input" placeholder="Digite sua pergunta..." autocomplete="off" />
+      <button id="chat-send" class="chat-send-btn" onclick="sendMessage()" title="Enviar">↑</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- TASK MODAL -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="task-overlay" class="modal-overlay" onclick="closeTaskModal()">
+  <div id="task-modal" class="task-modal" onclick="event.stopPropagation()">
+    <div class="task-modal-header">
+      <div>
+        <div class="task-modal-squad" id="task-modal-squad">Squad</div>
+        <div class="task-modal-title" id="task-modal-title">Task</div>
+      </div>
+      <button class="chat-close" onclick="closeTaskModal()" title="Fechar">✕</button>
+    </div>
+    <div class="task-modal-body" id="task-modal-body"></div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+// CONFIGURAÇÃO
+// ══════════════════════════════════════════════════════
+const N8N_WEBHOOK = 'https://edilson-dark-n8n.7lvlou.easypanel.host/webhook/aios-chat';
+
+// ══════════════════════════════════════════════════════
+// INFO DOS CLONES
+// ══════════════════════════════════════════════════════
+const CLONE_INFO = {
+  'dan-kennedy':     { emoji: '💰', name: 'Dan Kennedy',      role: 'Head de Squad Vendas',        badge: '19/20 Lendário',  color: '#ff5252' },
+  'russell-brunson': { emoji: '📣', name: 'Russell Brunson',  role: 'Head de Squad Marketing',     badge: '97-99% Elite',    color: '#ff6d00' },
+  'lincoln-murphy':  { emoji: '🤝', name: 'Lincoln Murphy',   role: 'Head de Squad CS',            badge: '20/20 Lendário',  color: '#26c6da' },
+  'marty-cagan':     { emoji: '📦', name: 'Marty Cagan',      role: 'Head de Squad Produto',       badge: '20/20 Lendário',  color: '#ba68c8' },
+  'michael-gerber':  { emoji: '🏭', name: 'Michael Gerber',   role: 'Head de Squad PME',           badge: '20/20 Lendário',  color: '#c6f135' },
+  'sheryl-sandberg': { emoji: '🏢', name: 'Sheryl Sandberg',  role: 'Head de Squad Admin',         badge: '20/20 Lendário',  color: '#42a5f5' },
+  'alex-hormozi':    { emoji: '⚡', name: 'Alex Hormozi',     role: 'Agente Chefe — COO',          badge: '100% Elite',      color: '#ffc107' },
+  'simon-sinek':     { emoji: '🎯', name: 'Simon Sinek',      role: 'Conselheiro — Propósito',     badge: 'testeBrasil ✅',  color: '#ce93d8' },
+  'steve-jobs':      { emoji: '🍎', name: 'Steve Jobs',       role: 'Conselheiro — Produto',       badge: 'testeBrasil ✅',  color: '#ef9a9a' },
+  'elon-musk':       { emoji: '🚀', name: 'Elon Musk',        role: 'Conselheiro — Tech',          badge: 'testeBrasil ✅',  color: '#80deea' },
+  'seth-godin':      { emoji: '📖', name: 'Seth Godin',       role: 'Conselheiro — Marketing',     badge: 'testeBrasil ✅',  color: '#a5d6a7' },
+  'ry-schwartz':     { emoji: '✉️', name: 'Ry Schwartz',      role: 'Email Copywriter — Avulso',   badge: '69/70 Elite',     color: '#546e7a' }
+};
+
+// ══════════════════════════════════════════════════════
+// MENSAGENS DE ABERTURA DOS CLONES
+// ══════════════════════════════════════════════════════
+const CLONE_OPENERS = {
+  'dan-kennedy':     'Deixa eu ser direto: marketing sem ROI é hobby. O que você quer resolver hoje?',
+  'russell-brunson': 'Vamos construir um funil que converte de verdade. O que você está tentando vender?',
+  'lincoln-murphy':  'Antes de qualquer coisa: que resultado concreto os seus clientes precisam alcançar? Comece por aí.',
+  'marty-cagan':     'Antes de construir qualquer coisa — qual é o problema real que você quer resolver?',
+  'michael-gerber':  'Pergunta direta: se você ficasse 30 dias sem trabalhar, o que aconteceria com seu negócio?',
+  'sheryl-sandberg': 'Quando você pensa nos desafios da empresa hoje, o que vem primeiro: pessoa, processo ou ferramenta?',
+  'alex-hormozi':    'Uma pergunta antes de começar: qual é o número que mais tira seu sono no negócio agora?',
+  'simon-sinek':     'Boa pergunta para começar: por que você está aqui hoje? O que está tentando construir?',
+  'steve-jobs':      'Me diga — o que você quer que as pessoas sintam quando usam seu produto?',
+  'elon-musk':       'Qual é o problema? Sem contexto, sem história. Só o problema e os números.',
+  'seth-godin':      'Para quem é isso que você está construindo? Antes de qualquer outra coisa — pra quem?',
+  'ry-schwartz':     'Aqui está o que eu percebi... antes de falar sobre copy, preciso entender: o que você realmente está tentando comunicar?'
+};
+
+// ══════════════════════════════════════════════════════
+// CONTEÚDO DAS TASKS
+// ══════════════════════════════════════════════════════
+const TASKS = {
+  'lead-qualification': {
+    squad: 'Vendas', color: '#ff5252',
+    title: 'Lead Qualification (BANT)',
+    content: `# Lead Qualification (BANT)
+**Squad:** Vendas | **Head:** Dan Kennedy | **Cargo:** SDR
+
+## O que é
+Qualificar leads usando o framework BANT para determinar se têm perfil para avançar no pipeline.
+
+## Input / Output
+- **Input:** Lead com score ≥ 70 (vindo de Lead Scoring)
+- **Output:** Lead qualificado ou descartado com motivo documentado
+
+## Framework BANT
+
+| Critério | Pergunta-chave | Mínimo |
+|----------|---------------|--------|
+| **B**udget | "Qual é o orçamento disponível?" | R$3.000/mês |
+| **A**uthority | "Você é quem decide ou precisa consultar?" | Decisor direto |
+| **N**eed | "Qual é o maior problema que quer resolver?" | Dor clara e urgente |
+| **T**imeline | "Quando precisa ter isso resolvido?" | ≤ 90 dias |
+
+## Critérios de Aceite
+- BANT documentado no CRM
+- Score ≥ 70 → avança para Discovery Call
+- Score < 70 → nurture ou descarte com motivo registrado
+
+## Dan Kennedy sobre qualificação:
+> "O prospect que chega na sua reunião já deve ter 'pré-decidido' comprar. Se você ainda está tentando convencer durante a venda, o marketing falhou."
+
+## Ferramentas
+CRM (HubSpot/Pipedrive), WhatsApp, Calendly`
+  },
+
+  'discovery-call': {
+    squad: 'Vendas', color: '#ff5252',
+    title: 'Discovery Call',
+    content: `# Discovery Call
+**Squad:** Vendas | **Head:** Dan Kennedy | **Cargo:** SDR → entrega para Closer
+
+## O que é
+Chamada estruturada (45-60min) para mapear necessidades, validar fit e preparar proposta.
+
+## Input / Output
+- **Input:** Lead qualificado (BANT ≥ 70)
+- **Output:** Necessidades mapeadas + fit confirmado + briefing no CRM
+
+## Estrutura da Discovery Call
+
+**Fase 1 — Rapport (5 min)**
+Breve conexão humana. Sem pitch ainda.
+
+**Fase 2 — Diagnóstico (25 min)**
+- "Me conta sobre seu negócio. Onde vocês estão hoje?"
+- "Qual é o maior obstáculo para chegar onde querem?"
+- "O que já tentaram? Por que não funcionou?"
+- "Se esse problema fosse resolvido, o que mudaria?"
+
+**Fase 3 — Qualificação (15 min)**
+- Budget: "Têm orçamento definido para isso?"
+- Authority: "Quem mais precisa estar nessa conversa?"
+- Timeline: "Quando precisam ver resultado?"
+
+**Fase 4 — Next Step (5 min)**
+- "Faz sentido eu preparar uma proposta personalizada?"
+- Agendar reunião de proposta em ≤ 48h
+
+## Quality Gate #1
+Score ≥ 70 + BANT validado + Discovery documentada + Briefing completo no CRM
+
+## Ferramentas
+Zoom/Google Meet, Notion (template de briefing), CRM`
+  },
+
+  'close-deal': {
+    squad: 'Vendas', color: '#ff5252',
+    title: 'Close Deal',
+    content: `# Close Deal
+**Squad:** Vendas | **Head:** Dan Kennedy | **Cargo:** Closer
+
+## O que é
+Fechar o contrato, coletar pagamento e fazer handoff para CS.
+
+## Input / Output
+- **Input:** Lead que passou por Proposta + Negociação
+- **Output:** Contrato assinado + pagamento confirmado + briefing para CS
+
+## Roteiro de Fechamento (Dan Kennedy Style)
+
+**1. Recap:**
+"Então, o que você me disse foi que [PROBLEMA]. E o resultado que você quer é [META]. Certo?"
+
+**2. Decisão:**
+"Então, faz sentido a gente começar agora?"
+
+**3. Objeção de preço:**
+> "Preço existe no contexto de valor. Se custa R$1 mas não funciona — é caro. Se funciona — qualquer preço é barato."
+
+**4. Próximo passo concreto:**
+"Vou te mandar o contrato agora. Assina ainda hoje e começamos o onboarding essa semana."
+
+## Predetermination
+O prospect que chega na reunião já deve ter "pré-decidido" comprar. A conversa de fechamento é só confirmar o que ele já decidiu.
+
+## Quality Gate #2
+- Contrato assinado + pagamento confirmado
+- Briefing de onboarding documentado e enviado ao CS
+- Motivo registrado no CRM (ganho ou perdido)
+
+## Ferramentas
+CRM, Stripe/PagSeguro, ZapSign (contratos), WhatsApp`
+  },
+
+  'create-content': {
+    squad: 'Marketing', color: '#ff6d00',
+    title: 'Create Content',
+    content: `# Create Content
+**Squad:** Marketing | **Head:** Russell Brunson | **Cargo:** Social Media Manager
+
+## O que é
+Criar conteúdo para redes sociais seguindo o framework Hook → Story → Offer.
+
+## Framework: Hook → Story → Offer
+
+**🪝 HOOK (primeiros 3 segundos)**
+Faz a pessoa parar o scroll. Formatos BR:
+- Pergunta provocativa: "Por que 90% dos funis no Brasil não convertem?"
+- Afirmação contraintuitiva: "Ter mais seguidores está matando suas vendas"
+- Número específico: "R$240.000 perdidos por não fazer isso"
+
+**📖 STORY (desenvolvimento)**
+- Ponte da Epifania: "Eu costumava pensar X... até descobrir Y"
+- Conflito + resolução
+- Torna o leitor o herói potencial da história
+
+**🎯 OFFER (CTA claro)**
+- Um único CTA por post
+- Específico: "Comentem 'FUNIL' para receber o template"
+- Direto: "Link na bio — acesso gratuito até domingo"
+
+## Formatos por Plataforma BR
+
+| Plataforma | Formato Ideal | Frequência |
+|-----------|--------------|-----------|
+| Instagram | Carrossel (7-10 slides) | 5x/semana |
+| Instagram | Reels (15-30s) | 3x/semana |
+| YouTube | Vídeo longo (10-20min) | 2x/semana |
+| LinkedIn | Post texto + imagem | 3x/semana |
+
+## Quality Gate #1
+Post aprovado por Russell → publicar | Reprovado → revisão
+Lead no DM → encaminha para SDR`
+  },
+
+  'write-launch-sequence': {
+    squad: 'Marketing', color: '#ff6d00',
+    title: 'Write Launch Email Sequence',
+    content: `# Write Launch Email Sequence
+**Squad:** Marketing | **Head:** Russell Brunson | **Cargo:** Email Copywriter (Ry Schwartz)
+
+## O que é
+Escrever a sequência completa de emails de lançamento usando o framework EII.
+
+## Framework EII (Ry Schwartz)
+
+**E — Emotion (1-3 linhas)**
+Nomeia o estado emocional do leitor com precisão.
+*"Você está na semana mais importante do seu lançamento. E provavelmente está sentindo uma mistura de ansiedade e esperança."*
+
+**I — Insight (3-5 parágrafos)**
+Revela a causa raiz não vista. Não dá dicas — muda perspectiva.
+*"Aqui está o que eu percebi em 200+ lançamentos..."*
+
+**I — Invitation (1-2 parágrafos)**
+Próxima ação + permissão explícita para não agir.
+*"Se fizer sentido pra você, o link está abaixo. E se não fizer — tudo bem também."*
+
+## Estrutura da Sequência (7 emails)
+
+| Email | Quando | Objetivo |
+|-------|--------|---------|
+| E1 — Abertura | D-7 | Plantar identidade |
+| E2 — Problema | D-5 | Nomear a dor |
+| E3 — Insight | D-3 | Reframe profundo |
+| E4 — Solução | D-1 | Apresentar produto |
+| E5 — Prova | D-day manhã | Casos reais |
+| E6 — Urgência real | D-day tarde | Fechamento honesto |
+| E7 — Piglet Template | Último dia | Permissão para não comprar |
+
+## Tensão Produtiva: Russell × Ry
+- **Russell:** "Obrigação moral de vender" — energia 8/10
+- **Ry:** "Serve first, sell second" — energia 6.5/10
+- **Resultado:** emails com ambição E integridade`
+  },
+
+  'first-value': {
+    squad: 'Customer Success', color: '#26c6da',
+    title: 'First Value',
+    content: `# First Value
+**Squad:** Customer Success | **Head:** Lincoln Murphy | **Cargo:** Onboarding Specialist
+
+## O que é
+Garantir que o cliente alcance a primeira vitória real e mensurável o mais rápido possível.
+
+## Por que isso importa
+> "Time to First Value é o KPI mais importante do onboarding. Não é a satisfação — é quando o cliente para de questionar a compra e começa a confiar na jornada." — Lincoln Murphy
+
+## O que é uma Primeira Vitória Real
+
+| ❌ NÃO é First Value | ✅ É First Value |
+|---------------------|----------------|
+| "Cliente está feliz" | "Cliente aplicou o script e agendou 3 calls" |
+| "Enviamos todos os materiais" | "Cliente fechou a primeira venda com o processo" |
+| "Onboarding completo" | "Cliente subiu de 3% para 7% de conversão" |
+
+## Protocolo de First Value
+
+**D+2 (após welcome) — Sessão de diagnóstico 40min**
+- Qual é o Resultado Desejado deles?
+- O que precisam fazer esta semana para chegar lá?
+- Quais obstáculos existem?
+
+**D+5 — Check-in assíncrono**
+- "Conseguiram aplicar [ação específica] que combinamos?"
+- Se sim → documentar vitória
+- Se não → identificar blocker e remover
+
+**D+7 — First Value Milestone**
+- Vitória documentada no CRM
+- Score de satisfação aplicado
+
+## Métricas
+- Time to First Value: meta **≤ 7 dias** | alerta > 14 dias
+- Taxa de ativação: meta **≥ 80%**`
+  },
+
+  'health-check': {
+    squad: 'Customer Success', color: '#26c6da',
+    title: 'Health Check',
+    content: `# Health Check
+**Squad:** Customer Success | **Head:** Lincoln Murphy | **Cargo:** CS/Retenção
+
+## O que é
+Avaliação proativa da saúde de cada cliente para identificar riscos de churn ANTES que se tornem problemas.
+
+## Health Score Framework
+
+Score 0-100, calculado por 5 dimensões:
+
+| Dimensão | Peso | Sinais positivos | Sinais de risco |
+|----------|------|-----------------|----------------|
+| Engajamento | 25% | Reuniões feitas, respostas rápidas | Sumiu, não responde |
+| Progresso | 30% | Metas avançando | Sem progresso 2+ semanas |
+| Resultado | 25% | KPIs melhorando | Métricas estagnadas |
+| Expansão | 10% | Comprou mais, indicou | Falou em cancelar |
+| Relacionamento | 10% | NPS alto | Difícil de agendar |
+
+## Semáforo de Saúde
+
+🟢 **Verde (70-100):** Saudável → manter engajamento + detectar expansão
+
+🟡 **Amarelo (40-69):** Atenção → contato proativo imediato com agenda clara
+
+🔴 **Vermelho (0-39):** Risco → reunião de emergência + plano de recuperação 48h
+
+## Regra de Ouro
+> "O pior contato possível é: 'Oi, só passando pra ver se tá tudo bem 😊'. Sempre ligue com agenda: qual resultado você quer alcançar nessa call." — Lincoln Murphy
+
+## Frequência
+- Revisão completa do dashboard: toda segunda-feira 9h
+- Alertas em tempo real: configurados no CRM`
+  },
+
+  'product-discovery': {
+    squad: 'Produto', color: '#ba68c8',
+    title: 'Product Discovery',
+    content: `# Product Discovery
+**Squad:** Produto | **Head:** Marty Cagan | **Cargo:** Product Manager
+
+## O que é
+Validar se uma oportunidade é real e se a solução resolve o problema — ANTES de construir qualquer coisa.
+
+## A Regra das 2 Semanas
+> "Se você não consegue colocar um protótipo na frente de 5 usuários reais em 2 semanas, algo está errado com seu processo." — Marty Cagan
+
+Ferramentas: Figma (free) | 5 usuários | 10 horas | **R$0**
+
+## Os 4 Grandes Riscos
+
+Todo produto precisa validar 4 riscos ANTES do delivery:
+
+| Risco | Pergunta | Método |
+|-------|----------|--------|
+| **Value** | O cliente realmente quer isso? | User interviews, prototype testing |
+| **Usability** | O cliente consegue usar? | Teste de usabilidade (5 pessoas) |
+| **Feasibility** | Conseguimos construir? | Spike técnico |
+| **Viability** | Faz sentido para o negócio? | Análise de margem |
+
+**No Brasil:** a maioria das empresas resolve só o Feasibility e ignora os outros 3.
+
+## Feature Factory vs. Time Empoderado
+
+❌ **Feature Factory:** "Precisamos adicionar a feature X"
+
+✅ **Time Empoderado:** "Precisamos resolver o problema Y do cliente"
+
+**Diagnóstico rápido:** Seu time recebe *features* ou *problemas* para resolver?
+
+## Cases BR
+- **Nubank:** apaixone-se pelo problema (não pela solução)
+- **RD Station:** product strategy com foco real (2-3 apostas)
+
+## Critério de Aceite
+- Oportunidade com dado real (não opinião)
+- Necessidade pesquisada com ≥ 5 pessoas
+- Protótipo testado antes de entrar no roadmap`
+  },
+
+  'contas-a-pagar': {
+    squad: 'Administração', color: '#42a5f5',
+    title: 'Contas a Pagar',
+    content: `# Contas a Pagar
+**Squad:** Administração | **Head:** Sheryl Sandberg | **Setor:** Financeiro
+
+## O que é
+Processar todos os pagamentos da empresa, garantindo que fornecedores sejam pagos corretamente e nos prazos acordados.
+
+## Processo (Sheryl Sandberg: Sistema antes de Velocidade)
+
+1. **Receber fatura** → cadastrar no Conta Azul imediatamente
+2. **Verificar:** valor correto? fornecedor cadastrado? serviço entregue?
+3. **Aprovar:** pagamentos > R$500 → aprovação do Head
+4. **Agendar:** pagar no dia programado (não no vencimento — no dia certo do fluxo)
+5. **Conciliar:** confirmar débito no extrato bancário
+
+## Diagnóstico PPF
+
+> "80% dos problemas de pagamento diagnosticados como 'esquecimento' são na verdade 'processo ausente'." — Sheryl Sandberg
+
+Se contas estão atrasando → verificar:
+- **Processo:** existe SOP documentado? Quem é o responsável?
+- **Ferramenta:** Conta Azul está sendo usado? Notificações configuradas?
+- **Pessoa:** tem tempo e acesso suficientes?
+
+## KPIs
+- Pagamentos em atraso: **meta 0**
+- Budget variance: **≤ 8%** do planejado
+- Tempo de processamento: **≤ 24h** após aprovação
+- DRE mensal entregue: **até dia 10**
+
+## Ferramentas
+Conta Azul, Banco Digital (Nubank PJ / Conta Stone), WhatsApp (aprovações rápidas)`
+  },
+
+  'contratos': {
+    squad: 'Administração', color: '#42a5f5',
+    title: 'Gestão de Contratos',
+    content: `# Gestão de Contratos
+**Squad:** Administração | **Head:** Sheryl Sandberg | **Setor:** Jurídico
+
+## O que é
+Elaborar, revisar e controlar todos os contratos da empresa.
+
+## Tipos de Contrato
+
+| Tipo | Quem assina | Ferramenta |
+|------|------------|-----------|
+| Cliente (prestação de serviços) | CEO + Cliente | ZapSign |
+| Fornecedor | CEO | ZapSign |
+| Colaborador CLT | RH + Colaborador | CTPS digital |
+| PJ/Freelancer | CEO + PJ | ZapSign |
+| Parceria | CEO | ZapSign |
+
+## Processo de Elaboração
+
+1. **Template:** sempre partir do template aprovado (não criar do zero)
+2. **Preencher:** partes, objeto, valor, prazo, entregáveis, penalidades
+3. **Revisar checklist jurídico:** LGPD, cláusula de confidencialidade, rescisão
+4. **Enviar para assinatura:** ZapSign — prazo de 48h
+5. **Arquivar:** Google Drive estruturado + data de vencimento no sistema
+
+## Controle de Vencimentos
+
+**KPI inegociável:** Contratos vencidos = **0**
+- Alerta 60 dias antes do vencimento
+- Decisão de renovar/encerrar com 30 dias de antecedência
+
+## LGPD
+Todos os contratos com tratamento de dados pessoais devem incluir cláusula de responsabilidade pelo tratamento de dados (Base: Art. 42-45 da LGPD).
+
+## Stack
+ZapSign (assinatura digital), Google Drive (arquivo), Conta Azul (controle de vencimentos), Notion (SOP)`
+  },
+
+  'diagnostico-estagio': {
+    squad: 'PME', color: '#c6f135',
+    title: 'Avaliação de Estágio',
+    content: `# Avaliação de Estágio (E-Myth)
+**Squad:** PME | **Head:** Michael Gerber | **Setor:** Diagnóstico
+
+## O que é
+Identificar em qual dos 3 estágios do E-Myth o negócio se encontra e qual personalidade está dominando.
+
+## Os 3 Estágios
+
+### 🍼 Infância (0-3 anos)
+"O negócio é o dono. O dono é o negócio."
+- **Sinais:** tudo passa pelo dono, sem processos documentados, sem delegação real
+- **Quando o dono para → o negócio para**
+- **Solução:** criar os 5 primeiros sistemas essenciais
+
+### 🧒 Adolescência (3-10 anos) — ONDE 80% DAS PMEs BR MORREM
+"O negócio cresceu além da capacidade de gestão do dono."
+- **Sinais:** caos, apagando incêndios, equipe sem direção
+- **Problema:** crescimento sem sistema = caos em escala
+- **Solução:** Franchise Prototype + Position Contracts
+
+### 🏢 Maturidade
+"O negócio funciona com ou sem o dono."
+- **Sinais:** sistemas documentados, equipe autônoma
+- **Manutenção:** Innovation → Quantification → Orchestration contínuo
+
+## As 3 Personalidades
+
+| Personalidade | % típica BR | Sinal de alerta |
+|-------------|------------|----------------|
+| **Técnico** | 70% | "Faço tudo eu mesmo, ninguém faz como eu" |
+| **Gerente** | 20% | "Preciso de mais controle e organização" |
+| **Empreendedor** | 10% | "Quero expandir, criar, inovar" |
+
+## Trigger Map
+
+| Palavra-chave | Framework a aplicar |
+|--------------|-------------------|
+| "faço tudo eu mesmo" | 3 Personalidades — Técnico dominando |
+| "não consigo delegar" | Franchise Prototype antes de pessoas |
+| "quero crescer/escalar" | Eightfold Path — em qual degrau? |
+| "não sobra dinheiro" | 4 Fatores de Dinheiro |
+| "o negócio depende de mim" | E-Myth + Ops Manual urgente |`
+  },
+
+  'franchise-prototype': {
+    squad: 'PME', color: '#c6f135',
+    title: 'Franchise Prototype',
+    content: `# Franchise Prototype
+**Squad:** PME | **Head:** Michael Gerber | **Setor:** Sistemas & Processos
+
+## O que é
+Criar o "manual da franquia invisível" — documentar como o negócio funciona de forma que uma pessoa comum consiga executar cada processo corretamente.
+
+## A Pergunta Fundamental
+> "Se você abrisse uma segunda unidade do seu negócio amanhã, o que você precisaria ter documentado para que ela funcionasse sem você?"
+
+## Teste de Pessoa Comum
+> "Uma pessoa comum, sem experiência no seu setor, consegue executar este processo seguindo este manual?"
+
+Se a resposta for **NÃO** → o manual está incompleto.
+
+## Os 5 Sistemas Essenciais
+
+| Sistema | O que documenta |
+|---------|----------------|
+| **1. Geração de Leads** | Como atrair clientes de forma previsível |
+| **2. Conversão** | Como transformar leads em clientes pagantes |
+| **3. Entrega ao Cliente** | Como entregar com consistência |
+| **4. Gestão** | Como gerenciar pessoas, tempo e recursos |
+| **5. Financeiro** | Como controlar receitas, despesas e caixa |
+
+## O Modelo McDonald's
+> "McDonald's não vende hambúrguer — vende um sistema."
+
+O hambúrguer tem sempre o mesmo sabor porque existe um sistema. Não porque o funcionário é especial.
+
+**Pergunta para o dono:**
+"Seu negócio funciona por **talento** (insubstituível) ou por **sistema** (replicável)?"
+
+## Quality Gate #3
+- Todos os 5 sistemas avaliados (mesmo que incompletos)
+- Pelo menos 1 processo completamente documentado
+- Teste de pessoa comum realizado e aprovado`
+  },
+
+  'discovery-process': {
+    squad: 'OPS', color: '#69f0ae',
+    title: 'Discovery Process',
+    content: `# Discovery Process
+**Squad:** OPS | **Head:** Edilson Morais | **Cargo:** Process Mapper
+
+## O que é
+Mapear completamente um processo de ponta a ponta antes de qualquer implementação técnica.
+
+## O Princípio Fundamental
+> "Mapear antes de construir. Entender antes de executar."
+
+## Processo de Descoberta
+
+**Fase 1 — Entendimento (2-4h)**
+- Quem são os stakeholders afetados?
+- Qual é o objetivo de negócio? (não a solução técnica)
+- Estado atual (as-is) vs Estado desejado (to-be)
+- Quais são as restrições (tempo, budget, tecnologia)?
+
+**Fase 2 — Mapeamento (4-8h)**
+- Mapear cada etapa (início ao fim)
+- Identificar decisões e bifurcações
+- Identificar tarefas repetitivas → candidatas à automação
+- Mapear fluxos de erro e exceções
+- Validar com stakeholders
+
+**Fase 3 — Documentação (2-4h)**
+- Gravar em Loom (explicação verbal)
+- Documentar no Notion (escrito + fluxograma)
+- Validar com o dono do processo
+
+## O que NÃO fazer nesta etapa
+❌ Criar arquitetura no ClickUp
+❌ Criar automações
+❌ Implementar qualquer coisa
+
+## Quality Gate #1
+Aprovado pelo **Architect** antes de avançar:
+- Processo mapeado fim a fim ✅
+- Stakeholders validaram ✅
+- Documento no Notion ✅
+
+## Ferramentas
+ClickUp, Notion, Loom, Google Drive`
+  },
+
+  'create-automations': {
+    squad: 'OPS', color: '#69f0ae',
+    title: 'Create Automations',
+    content: `# Create Automations
+**Squad:** OPS | **Head:** Edilson Morais | **Cargo:** Automation Architect
+
+## O que é
+Criar e configurar todas as automações do processo, garantindo que funcionem perfeitamente antes de ativar em produção.
+
+## Princípio Fundamental
+> "Automatize o que é repetitivo e previsível. Preserve julgamento humano onde ele importa."
+
+## Tipos de Automação por Prioridade
+
+**1. Automações de Bloqueio de Erro** *(alta prioridade)*
+Impedem que o processo avance com dados incompletos.
+*Exemplo: não permite mover card para "Proposta" sem Discovery documentada*
+
+**2. Automações de Notificação** *(alta prioridade)*
+Alertam responsáveis sobre ação necessária.
+*Exemplo: notifica Closer quando SDR conclui Discovery Call*
+
+**3. Automações de Status** *(média prioridade)*
+Movem cards automaticamente baseado em triggers.
+
+**4. Automações de Relatório** *(baixa prioridade)*
+Compilam dados e enviam relatórios automáticos.
+
+## Stack de Ferramentas
+
+| Ferramenta | Uso |
+|-----------|-----|
+| ClickUp Automations | Fluxo interno |
+| n8n | Automações complexas entre sistemas |
+| Zapier | Integrações rápidas SaaS-to-SaaS |
+| Webhooks | Triggers personalizados |
+
+## Regra Inegociável
+**Teste antes de ativar.**
+Toda automação passa por:
+- Cenário happy-path
+- Pelo menos 2 cenários de erro
+
+## Quality Gate #3
+Aprovado pelo QA antes de ir para produção.`
+  }
+};
+
+// ══════════════════════════════════════════════════════
+// ESTADO DO CHAT
+// ══════════════════════════════════════════════════════
+let currentCloneId = null;
+let chatHistory = [];
+let isSending = false;
+
+// ══════════════════════════════════════════════════════
+// FUNÇÕES DO CHAT MODAL
+// ══════════════════════════════════════════════════════
+function openChatModal(cloneId) {
+  const info = CLONE_INFO[cloneId];
+  if (!info) return;
+
+  currentCloneId = cloneId;
+  chatHistory = [];
+
+  // Preenche o header
+  document.getElementById('chat-avatar').textContent = info.emoji;
+  document.getElementById('chat-name').textContent = info.name;
+  document.getElementById('chat-role').textContent = info.role;
+  document.getElementById('chat-badge').textContent = info.badge;
+  document.getElementById('chat-badge').style.color = info.color;
+  document.getElementById('chat-badge').style.background = info.color + '18';
+  document.getElementById('chat-badge').style.borderColor = info.color + '40';
+
+  // Limpa mensagens
+  const messagesEl = document.getElementById('chat-messages');
+  messagesEl.innerHTML = '';
+
+  // Mostra overlay
+  document.getElementById('chat-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  // Mensagem de abertura
+  const opener = CLONE_OPENERS[cloneId] || 'Como posso ajudar?';
+  chatHistory.push({ role: 'assistant', content: opener });
+  addMessage('assistant', opener);
+
+  // Foca no input
+  setTimeout(() => document.getElementById('chat-input').focus(), 100);
+}
+
+function closeChatModal() {
+  document.getElementById('chat-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentCloneId = null;
+  chatHistory = [];
+  isSending = false;
+}
+
+function addMessage(role, content) {
+  const messagesEl = document.getElementById('chat-messages');
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble ' + role;
+  bubble.textContent = content;
+  messagesEl.appendChild(bubble);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function showTyping() {
+  document.getElementById('chat-typing').style.display = 'block';
+  document.getElementById('chat-send').disabled = true;
+  const messagesEl = document.getElementById('chat-messages');
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function hideTyping() {
+  document.getElementById('chat-typing').style.display = 'none';
+  document.getElementById('chat-send').disabled = false;
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const message = input.value.trim();
+  if (!message || isSending) return;
+
+  isSending = true;
+  input.value = '';
+
+  // Adiciona mensagem do usuário
+  addMessage('user', message);
+  chatHistory.push({ role: 'user', content: message });
+  showTyping();
+
+  try {
+    const response = await fetch(N8N_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        clone_id: currentCloneId,
+        messages: chatHistory
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    const assistantMessage = data.response || 'Resposta não disponível.';
+
+    chatHistory.push({ role: 'assistant', content: assistantMessage });
+    hideTyping();
+    addMessage('assistant', assistantMessage);
+
+  } catch (error) {
+    hideTyping();
+    const errMsg = '⚠️ Não foi possível conectar ao clone.\n\nVerifique:\n1. Workflow n8n "AIOS Chat" está ATIVO?\n2. ANTHROPIC_API_KEY está configurada no n8n?\n3. Acesse: https://edilson-dark-n8n.7lvlou.easypanel.host';
+    addMessage('assistant', errMsg);
+  }
+
+  isSending = false;
+  input.focus();
+}
+
+// ══════════════════════════════════════════════════════
+// FUNÇÕES DO TASK MODAL
+// ══════════════════════════════════════════════════════
+function openTaskModal(taskId) {
+  const task = TASKS[taskId];
+  if (!task) return;
+
+  document.getElementById('task-modal-squad').textContent = task.squad;
+  document.getElementById('task-modal-squad').style.color = task.color;
+  document.getElementById('task-modal-title').textContent = task.title;
+
+  // Renderiza markdown
+  const bodyEl = document.getElementById('task-modal-body');
+  if (typeof marked !== 'undefined') {
+    bodyEl.innerHTML = marked.parse(task.content);
+  } else {
+    bodyEl.textContent = task.content;
+  }
+
+  document.getElementById('task-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTaskModal() {
+  document.getElementById('task-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ══════════════════════════════════════════════════════
+// EVENT LISTENERS
+// ══════════════════════════════════════════════════════
+
+// Delegação de eventos para clone cards
+document.addEventListener('click', function(e) {
+  const cloneCard = e.target.closest('[data-clone]');
+  if (cloneCard && !e.target.closest('[data-task]')) {
+    openChatModal(cloneCard.dataset.clone);
+    return;
+  }
+
+  const taskItem = e.target.closest('[data-task]');
+  if (taskItem) {
+    openTaskModal(taskItem.dataset.task);
+  }
+});
+
+// Enter para enviar mensagem
+document.getElementById('chat-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+// Fechar modais com Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeChatModal();
+    closeTaskModal();
+  }
+});
+</script>
 
 </body>
 </html>
