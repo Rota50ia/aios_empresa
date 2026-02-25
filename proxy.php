@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-$n8n_url = 'https://edilson-dark-n8n.7lvlou.easypanel.host/webhook/aios-chat';
+$n8n_url = 'https://edilson-dark-n8n.7lvlou.easypanel.host/webhook/aios-chat-v2';
 
 $body = file_get_contents('php://input');
 
