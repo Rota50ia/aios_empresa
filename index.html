@@ -1530,7 +1530,7 @@ async function sendMessage() {
     }
 
     const data = await response.json();
-    const assistantMessage = data.response || 'Resposta não disponível.';
+    const assistantMessage = data.response || (data.content && data.content[0] && data.content[0].text) || 'Resposta não disponível.';
 
     chatHistory.push({ role: 'assistant', content: assistantMessage });
     hideTyping();
