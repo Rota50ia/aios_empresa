@@ -168,6 +168,8 @@ body {
 .sp-kpi { font-size: 0.62rem; font-weight: 600; margin-bottom: 8px; }
 .sp-funcs { font-size: 0.62rem; color: #666; line-height: 1.7; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; }
 .sp-func { display: flex; align-items: center; gap: 5px; }
+.sp-role-label { font-size: 0.5rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #555; margin: 6px 0 2px; padding: 1px 5px; background: rgba(255,255,255,0.04); border-radius: 3px; display: inline-block; }
+.sp-role-label:first-child { margin-top: 0; }
 .sp-dot { width: 5px; height: 5px; border-radius: 50%; background: #333; flex-shrink: 0; }
 .sp-dot.ok { background: #00e676; }
 .sp-dot.wip { background: #ffa726; }
@@ -486,9 +488,12 @@ body {
         <div class="sp-title">💰 Squad Vendas</div>
         <div class="sp-kpi" style="color:var(--vendas)">SDR · Closer · Analista</div>
         <div class="sp-funcs">
+          <div class="sp-role-label" style="color:var(--vendas)">SDR</div>
           <div class="sp-func clickable-task" data-task="lead-qualification"><div class="sp-dot ok"></div>Lead Qualification<span class="task-hint">📋</span></div>
           <div class="sp-func clickable-task" data-task="discovery-call"><div class="sp-dot ok"></div>Discovery Call<span class="task-hint">📋</span></div>
+          <div class="sp-role-label" style="color:var(--vendas)">CLOSER</div>
           <div class="sp-func clickable-task" data-task="close-deal"><div class="sp-dot ok"></div>Close Deal<span class="task-hint">📋</span></div>
+          <div class="sp-role-label" style="color:var(--vendas)">ANALISTA</div>
           <div class="sp-func"><div class="sp-dot ok"></div>Pipeline + Forecast</div>
         </div>
         <div class="sp-badges">
