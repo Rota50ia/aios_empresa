@@ -227,15 +227,38 @@ body {
 
 /* ─── STATS ─── */
 .stats-bar {
-  display: flex; justify-content: center; gap: 0; flex-wrap: wrap;
-  padding: 24px 30px; background: rgba(255,255,255,0.02);
-  border-radius: 16px; border: 1px solid var(--border);
-  max-width: 860px; margin-left: auto; margin-right: auto;
+  display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
+  max-width: 900px; margin-left: auto; margin-right: auto;
+  background: none; border: none; padding: 0;
 }
-.stat { text-align: center; padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.06); }
-.stat:last-child { border-right: none; }
-.stat .val { font-size: 1.8rem; font-weight: 900; color: var(--ceo); letter-spacing: -1px; }
-.stat .lbl { font-size: 0.6rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+.stat {
+  flex: 1; min-width: 170px; max-width: 230px;
+  text-align: left; padding: 20px 22px;
+  background: rgba(6,6,16,0.95);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.07);
+  position: relative; overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.stat:hover { transform: translateY(-4px); }
+.stat .lbl {
+  display: block; font-size: 0.55rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: #444; margin-bottom: 10px;
+}
+.stat .val {
+  display: block; font-size: 2.4rem; font-weight: 900;
+  color: #fff; letter-spacing: -1.5px; line-height: 1;
+}
+/* Cores por posição */
+.stat:nth-child(1) { border-color: rgba(124,77,255,0.45); box-shadow: 0 0 24px rgba(124,77,255,0.12), inset 0 0 20px rgba(124,77,255,0.04); }
+.stat:nth-child(1) .val { color: #c4b5fd; }
+.stat:nth-child(2) { border-color: rgba(105,240,174,0.45); box-shadow: 0 0 24px rgba(105,240,174,0.12), inset 0 0 20px rgba(105,240,174,0.04); }
+.stat:nth-child(2) .val { color: #69f0ae; }
+.stat:nth-child(3) { border-color: rgba(0,229,255,0.45); box-shadow: 0 0 24px rgba(0,229,255,0.12), inset 0 0 20px rgba(0,229,255,0.04); }
+.stat:nth-child(3) .val { color: #00e5ff; }
+.stat:nth-child(4) { border-color: rgba(255,193,7,0.45); box-shadow: 0 0 24px rgba(255,193,7,0.1), inset 0 0 20px rgba(255,193,7,0.04); }
+.stat:nth-child(4) .val { color: #ffc107; }
 
 /* ─── FOOTER ─── */
 .footer { text-align: center; margin-top: 30px; color: #2a2a3a; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; }
